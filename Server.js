@@ -17,5 +17,9 @@ mongoose
 .catch((err)=>console.log(err))
 
 app.use(routes)
-app.use(cors())
+app.use(cors({
+    origin: "*"
+  })
+  )
+
 app.listen(PORT,()=>console.log('listening on port 5000'))
