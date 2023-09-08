@@ -4,7 +4,7 @@ const {getToDo, createToDo, updateToDo, deleteToDo} = require("../controllers/To
 
 const router = Router()
 
-router.get('/',getToDo)
+router.get('/get',getToDo)
 router.post('/create',createToDo)
 router.patch('/update/:id',updateToDo);
 router.delete('/delete/:id',deleteToDo);
