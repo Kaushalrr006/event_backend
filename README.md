@@ -18,7 +18,7 @@ Once you have the prerequisites installed, you can run the following commands to
 npm install nodejs
 node server.js
 
-The application will be available at https://event-manager-app-lgic.onrender.com/.
+The application will be available at https://backend-eventapp.onrender.com.
 
 
 
