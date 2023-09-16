@@ -19,24 +19,64 @@ module.exports.createToDo = async (req, res) => {
     }
 };
 
-module.exports.updateToDo = async(req, res)=>{
-    const {id}= req.params;
-    const { title, description } = req.body;
+// module.exports.updateToDo = async(req, res)=>{
+//     const {id}= req.params;
+//     const { title, description } = req.body;
 
-    try{
-        const updateToDo = await ToDoModel.findByIdAndUpdate(id, {title, description},{new : true });
-        if(!updateToDo){
-            return res.status(404).send("not found!!!!!!")
+//     try{
+//         const updateToDo = await ToDoModel.findByIdAndUpdate(id, {title, description},{new : true });
+//         if(!updateToDo){
+//             return res.status(404).send("not found!!!!!!")
+//         }
+//         console.log('Sucessfully updated');
+//         console.log('result : ',updateToDo);
+//         res.send(updateToDo); 
+//     }
+//     catch (error) {
+//         console.error("Error Updating ToDo:", error);
+//         res.status(500).send("Internal server error");
+//     }
+// }
+module.exports.updateToDo = async (req, res) => {
+    const { id } = req.params;
+    const { title, description, status } = req.body;
+
+    try {
+        const updateToDo = await ToDoModel.findByIdAndUpdate(id, { title, description, status }, { new: true });
+
+        if (!updateToDo) {
+            return res.status(404).send("not found!!!!!!");
         }
-        console.log('Sucessfully updated');
-        console.log('result : ',updateToDo);
-        res.send(updateToDo); 
-    }
-    catch (error) {
+
+        console.log('Successfully updated');
+        console.log('result : ', updateToDo);
+        res.send(updateToDo);
+    } catch (error) {
         console.error("Error Updating ToDo:", error);
         res.status(500).send("Internal server error");
     }
-}
+};
+module.exports.updateToDoStatus = async (req, res) => {
+    const { id } = req.params;
+    const { status } = req.body; // 'status' is the new stage
+
+    try {
+        const updateToDo = await ToDoModel.findByIdAndUpdate(id, { status }, { new: true });
+
+        if (!updateToDo) {
+            return res.status(404).send("Not found");
+        }
+
+        console.log('Successfully updated status');
+        console.log('Result:', updateToDo);
+        res.send(updateToDo);
+    } catch (error) {
+        console.error("Error updating status:", error);
+        res.status(500).send("Internal server error");
+    }
+};
+
+
 module.exports.deleteToDo = async (req, res) => {
     const {id}= req.params;
     const { title, description } = req.body;
