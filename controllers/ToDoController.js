@@ -57,11 +57,11 @@ module.exports.updateToDo = async (req, res) => {
     }
 };
 module.exports.updateToDoStatus = async (req, res) => {
-    const { id } = req.params;
+    const { cardId } = req.params;
     const { status } = req.body; // 'status' is the new stage
 
     try {
-        const updateToDo = await ToDoModel.findByIdAndUpdate(id, { status }, { new: true });
+        const updateToDo = await ToDoModel.findByIdAndUpdate(cardId, { status }, { new: true });
 
         if (!updateToDo) {
             return res.status(404).send("Not found");

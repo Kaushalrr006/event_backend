@@ -8,7 +8,7 @@ router.get('/get',getToDo)
 router.post('/create',createToDo)
 router.patch('/update/:id',updateToDo);
 router.delete('/delete/:id',deleteToDo);
-router.patch('/update/:id/status',updateToDoStatus);
+router.patch('/update/:cardId/status',updateToDoStatus);
 
 
 
