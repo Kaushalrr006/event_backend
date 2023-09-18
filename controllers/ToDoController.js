@@ -1,8 +1,21 @@
 const ToDoModel = require('../models/ToDoModel');
 
 module.exports.getToDo = async (req, res) => {
-    const toDo = await ToDoModel.find();
-    res.send({data: toDo});
+    // const toDo = await ToDoModel.find();
+    //    res.send({data: toDo});
+
+    const toDo = await ToDoModel.find({ status: "todo" })
+    const Progress = await ToDoModel.find({ status: "inProgress" })
+    const Done = await ToDoModel.find({ status: "done" })
+   
+    const responseData = {
+        todo: toDo,
+        progress: Progress,
+        done: Done
+    };
+
+    res.send(responseData);
+
 }
    
 module.exports.createToDo = async (req, res) => {
