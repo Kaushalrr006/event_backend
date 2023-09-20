@@ -34,10 +34,10 @@ module.exports.createToDo = async (req, res) => {
 
 module.exports.updateToDo = async (req, res) => {
     const { id } = req.params;
-    const { title, description, status } = req.body;
+    const { title, description } = req.body;
 
     try {
-        const updateToDo = await ToDoModel.findByIdAndUpdate(id, { title, description, status }, { new: true });
+        const updateToDo = await ToDoModel.findByIdAndUpdate(id, { title, description }, { new: true });
 
         if (!updateToDo) {
             return res.status(404).send("not found!!!!!!");
