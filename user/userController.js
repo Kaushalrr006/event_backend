@@ -78,3 +78,55 @@ module.exports.eventSignUp = async (req, res) => {
 
 }
 }
+
+module.exports.eventSignIn = async (req, res) => {
+    let { email , password } = req.body;
+    email = email.trim();
+    password = password.trim();
+
+    if(email == "" || password == ""){
+        res.json({
+            status: "Invalid",
+            message: "Empty credentials"
+        })
+    }else {
+        userModel.findOne({email})
+        .then(data => {
+        if(data){
+            const hashedPassword = data.password;
+            bcrypt.compare(password, hashedPassword).then(result => {
+                if(result){
+                    res.json({
+                        status: "Success",
+                        message: "Signed in successfully",
+                        data: data
+                    })
+                }else{
+                    res.json({
+                        status: "Failure",
+                        message: "Incorrect password"
+                    })
+                }
+            }).catch(err => {
+                res.json({
+                    status: "FAILURE",
+                    message: "Error while comparing",
+                   
+                })
+            })
+        }else{
+            res.json({
+                status: "FAILED",
+                message: "Inappropriate credentials entered",
+            })
+        }
+    }).catch(err=>{
+        res.json({
+            status: "Failed",
+            message: " An error occurred while checking the exsistentials"
+        })
+    })
+
+    }
+    
+}
