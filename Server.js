@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const routes = require('./routes/eventRoute')
+
 require('dotenv').config()
 
 
@@ -17,6 +18,9 @@ mongoose
   .connect(process.env.MONGODB_URL)
   .then(() => console.log('Connected to MongoDB!'))
   .catch((err) => console.log(err))
+
+  const userRoutes = require('./user/userRoute'); // Adjust the path as needed
+  app.use(userRoutes);
 
 app.use(routes)
 
