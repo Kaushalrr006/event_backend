@@ -1,4 +1,3 @@
-
 # Event Manager using MEAN 
 
 Event Planner Backend
